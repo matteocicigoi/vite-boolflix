@@ -37,7 +37,6 @@ export default {
 <template>
     <Search @find="searchAll"/>
     <MovieList />
-
 </template>
 
 <style scoped>
