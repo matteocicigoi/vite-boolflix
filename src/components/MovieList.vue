@@ -16,6 +16,7 @@ export default {
 
 <template>
     <ul>
-        <Movie v-for="movie in store.result" :movie="movie"/>
+        <Movie v-for="movie in store.movie" :movie="movie"/>
+        <Movie v-for="serie in store.series" :serie="serie"/>
     </ul>
 </template>

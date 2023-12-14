@@ -12,9 +12,18 @@ export default {
     },
     methods : {
         searchMovie(){
-            axios.get(store.url + store.searchText).then((response => {
-                store.result = response.data.results;
+            axios.get(store.urlMovie + store.searchText).then((response => {
+                store.movie = response.data.results;
             }));
+        },
+        searchSeries(){
+            axios.get(store.urlSeries + store.searchText).then((response => {
+                store.series = response.data.results;
+            }));
+        },
+        searchAll() {
+            this.searchMovie();
+            this.searchSeries();
         }
     },
     data() {
@@ -26,7 +35,7 @@ export default {
 </script>
 
 <template>
-    <Search @find="searchMovie"/>
+    <Search @find="searchAll"/>
     <MovieList />
 
 </template>
