@@ -66,7 +66,7 @@ export default {
 </template>
 
 <style scoped lang="scss">
-@use '../assets/style/partials/_variables.scss' as *;
+@use '../../assets/style/partials/_variables.scss' as *;
     li {
         width: calc((100% - 25px) / 6);
         border: double $brPrimary;

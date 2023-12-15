@@ -4,9 +4,9 @@ export default {}
 </script>
 <template>
     <ul>
-        <li>Movies</li>
-        <li>All</li>
-        <li>TV series</li>
+        <li>Film</li>
+        <li>Tutto</li>
+        <li>Serie Tv</li>
     </ul>
 </template>
 
