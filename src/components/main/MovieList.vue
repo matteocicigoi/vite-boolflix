@@ -38,8 +38,8 @@ export default {
         <span v-else>{{ infoText }}</span>
     </div>
     <ul v-if="store.request !== false">
-        <Movie v-for="movie in store.movie" :movie="movie"/>
-        <Movie v-for="serie in store.series" :serie="serie"/>
+        <Movie v-show="store.type === 'movies' || store.type === 'all'" v-for="movie in store.movie" :movie="movie"/>
+        <Movie v-show="store.type === 'series' || store.type === 'all'" v-for="serie in store.series" :serie="serie"/>
     </ul>
 </template>
 

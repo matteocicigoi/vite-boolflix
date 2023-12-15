@@ -30,16 +30,8 @@ export default {
         },
         searchFn() {
             this.store.request = false;
-            if(store.type === 'all'){
-                this.apiRequest('movie');
-                this.apiRequest('series');
-            }else if(store.type === 'movies'){
-                store.series = [];
-                this.apiRequest('movie');
-            }else{
-                store.movie = [];
-                this.apiRequest('series');
-            }
+            this.apiRequest('movie');
+            this.apiRequest('series');
         }
     },
     data() {
