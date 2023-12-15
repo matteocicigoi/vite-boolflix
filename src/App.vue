@@ -12,7 +12,6 @@ export default {
     },
     methods : {
         apiRequest(type){
-            store.request = false;
             let url;
             let obj;
             if(type === 'movie'){
@@ -29,9 +28,18 @@ export default {
                 store.request = true;
             }));
         },
-        searchAll() {
-            this.apiRequest('movie');
-            this.apiRequest('series');
+        searchFn() {
+            this.store.request = false;
+            if(store.type === 'all'){
+                this.apiRequest('movie');
+                this.apiRequest('series');
+            }else if(store.type === 'movies'){
+                store.series = [];
+                this.apiRequest('movie');
+            }else{
+                store.movie = [];
+                this.apiRequest('series');
+            }
         }
     },
     data() {
@@ -43,7 +51,7 @@ export default {
 </script>
 
 <template>
-    <Header @find="searchAll" />
+    <Header @find="searchFn" />
     <MovieList />
 </template>
 

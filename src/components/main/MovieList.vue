@@ -16,10 +16,10 @@ export default {
     },
     computed : {
         infoText(){
-            if(this.store.movie.length < 1 || this.store.movie.length < 1){
+            if(this.store.movie.length < 1 && this.store.series.length < 1){
                 if(this.store.request === null){
                     return 'Cerca un Film/Serie TV';
-                }else{
+                }else if(this.store.request === true){
                     return 'Nessun risultato trovato';
                 }
             }

@@ -1,12 +1,24 @@
 <script>
 /* Componente Menu */
-export default {}
+import { store } from '../../store';
+export default {
+    data() {
+        return {
+            store
+        }
+    },
+    methods : {
+        selectFn(data){
+            this.store.type = data;
+        }
+    }
+}
 </script>
 <template>
     <ul>
-        <li>Film</li>
-        <li>Tutto</li>
-        <li>Serie Tv</li>
+        <li :class="{selected : store.type === 'movies'}" @click="selectFn('movies')">Film</li>
+        <li :class="{selected : store.type === 'all'}" @click="selectFn('all')">Tutto</li>
+        <li :class="{selected : store.type === 'series'}" @click="selectFn('series')">Serie Tv</li>
     </ul>
 </template>
 
@@ -34,6 +46,10 @@ export default {}
        li {
         width: 5%;
         text-align: center;
+        cursor: pointer;
+        &.selected{
+            color: red;
+        }
        }
     }
 </style>

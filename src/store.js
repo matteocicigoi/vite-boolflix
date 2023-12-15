@@ -6,5 +6,6 @@ export const store = reactive ({
     searchText : '',
     movie : [],
     series : [],
-    request : null
+    request : null,
+    type : 'all'
 })
