@@ -1,4 +1,5 @@
 <script>
+/* Componente che genera la lista di Film e Serie Tv */
 import Movie from './Movie.vue';
 
 import { store } from '../store';
@@ -20,3 +21,13 @@ export default {
         <Movie v-for="serie in store.series" :serie="serie"/>
     </ul>
 </template>
+
+<style scoped lang="scss">
+    ul {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 5px;
+        list-style-type: none;
+    }
+</style>

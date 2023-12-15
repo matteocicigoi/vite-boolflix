@@ -1,29 +1,35 @@
 <script>
-import Search from './components/Search.vue';
 import MovieList from './components/MovieList.vue';
+import Header from './components/header/Header.vue';
 
 import axios from 'axios';
 import { store } from './store';
 
 export default {
     components : {
-        Search,
-        MovieList
+        MovieList,
+        Header
     },
     methods : {
-        searchMovie(){
-            axios.get(store.urlMovie + store.searchText).then((response => {
-                store.movie = response.data.results;
-            }));
-        },
-        searchSeries(){
-            axios.get(store.urlSeries + store.searchText).then((response => {
-                store.series = response.data.results;
+        apiRequest(type){
+            let url;
+            let obj;
+            if(type === 'movie'){
+                url = store.urlMovie;
+                obj = 'movie';
+            }
+            if(type === 'series'){
+                url = store.urlSeries;
+                obj = 'series';
+            }
+
+            axios.get(url + store.searchText).then((response => {
+                store[obj] = response.data.results;
             }));
         },
         searchAll() {
-            this.searchMovie();
-            this.searchSeries();
+            this.apiRequest('movie');
+            this.apiRequest('series');
         }
     },
     data() {
@@ -35,7 +41,7 @@ export default {
 </script>
 
 <template>
-    <Search @find="searchAll"/>
+    <Header @find="searchAll" />
     <MovieList />
 </template>
 

@@ -1,6 +1,8 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 
+import "@fontsource/roboto";
+import "./assets/style/style.scss";
 // Bandiere
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 
@@ -10,7 +12,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 /* icons */
 import { faStar as fasStar} from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar} from '@fortawesome/free-regular-svg-icons';
-library.add(fasStar, farStar);
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+library.add(fasStar, farStar, faMagnifyingGlass);
 // Fine Font awesome
 
 createApp(App)
