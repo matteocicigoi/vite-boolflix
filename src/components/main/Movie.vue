@@ -1,4 +1,6 @@
 <script>
+import { store } from '../../store';
+import axios from 'axios';
 /* Componente singolo film o serie tv */
 export default {
     props : ['movieOrSerie'],
@@ -27,6 +29,50 @@ export default {
             }
             return overview;
         }
+    },
+    methods : {
+        // mostra i primi 5 attori e i generi
+        otherFn(type, id){
+            if(this.other === true){
+                this.other = false;
+                return;
+            }
+            this.other = true;
+            if(type === 'serie')type = 'tv';
+            let actorsUrl;
+            const actors = [];
+            actorsUrl = store.actor.replace('REPLACE_TYPE', type).replace('REPLACE_ID', id);
+            axios.get(actorsUrl).then((response => {
+                let i = 0;
+                do{
+                    const element = response.data.cast[i];
+                    if(element.known_for_department === 'Acting'){
+                        actors.push(element.name);
+                    }
+                    i++;
+                }while(i < response.data.cast.length && actors.length < 5);
+                // generi
+                let genreUrl;
+                const generes = [];
+                genreUrl = store.genres.replace('REPLACE_ID', id);
+                axios.get(genreUrl).then((response => {
+                    for(let i = 0; i < response.data.genres.length; i++){
+                        const element = response.data.genres[i];
+                        generes.push(element.name);
+                    }
+                    this.genres = 'Generi: ' + generes.toString();
+                }));
+                this.actors = 'Attori: ' + actors.toString();
+            }));
+        }
+    },
+    data() {
+        return {
+            store,
+            other : false,
+            actors : '',
+            genres : ''
+        }
     }
 }
 </script>
@@ -44,7 +90,12 @@ export default {
                     <font-awesome-icon v-else icon="fa-regular fa-star" />
                 </li>
             </ul>
-            <h4 class="overview">{{ cutOverview }}</h4>
+            <h4 class="overview" v-if="other === false">{{ cutOverview }}</h4>
+            <template v-else>
+                <h4>{{ actors }}</h4>
+                <h4 class="genres">{{ genres }}</h4>
+            </template>
+            <button @click="otherFn(movieOrSerie.type, movieOrSerie.id)">Altre Informazioni</button>
         </div>
         </div>
         <img v-if="movieOrSerie.poster_path !== null" :src="`https://image.tmdb.org/t/p/w342${movieOrSerie.poster_path}`" :alt="movieOrSerie.title">
@@ -112,6 +163,26 @@ export default {
                 width: 100%;
                 background-color: $bgBody;
                 padding: 10px;
+
+                .genres{
+                    margin-top: 5px;
+                }
+                
+                button {
+                    all: unset;
+                    cursor: pointer;
+                    border: 1px solid $brPrimary;
+                    color: $textPrimary;
+                    margin: 10px;
+                    padding: 5px;
+                    border-radius: 5px;
+
+                    &:hover{
+                        border-color: $bgBody;
+                        color: $textSecondary;
+                        background-color: $textPrimary;
+                    }
+                }
             }
             ul {
                 display: flex;
