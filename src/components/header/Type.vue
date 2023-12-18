@@ -52,4 +52,30 @@ export default {
         }
        }
     }
+
+    /* responsive */
+
+    @media screen and (max-width: 1200px ){
+        ul {
+            padding: 0;
+        }
+    }
+    @media screen and (max-width: 992px ){
+        ul {
+            li {
+                width: 7%;
+            }
+            &::before, &::after {
+            width: 10%;
+
+            }
+        }
+    }
+    @media screen and (max-width: 576px ){
+        ul {
+            li {
+                width: 10%;
+            }
+        }
+    }
 </style>

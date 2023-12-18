@@ -28,6 +28,28 @@ export default {
             }
             return false;
         }
+    },
+    methods : {
+        // modifica le chiavi del oggetto e li aggiunge il tipo
+        editResult(obj, type){
+            const result = {};
+            if(type === 'serie'){
+                result.type = 'serie';
+            }else if(type === 'movie'){
+                result.type = 'movie';
+            }
+
+            for(let element in obj){
+                if(element === 'name'){
+                    result.title = obj[element];
+                }else if(element === 'original_name'){
+                    result.original_title = obj[element];
+                }else{
+                    result[element] = obj[element];
+                }
+            }
+            return result;
+        }
     }
 };
 </script>
@@ -38,8 +60,8 @@ export default {
         <span v-else>{{ infoText }}</span>
     </div>
     <ul v-if="store.request !== false">
-        <Movie v-show="store.type === 'movies' || store.type === 'all'" v-for="movie in store.movie" :movie="movie"/>
-        <Movie v-show="store.type === 'series' || store.type === 'all'" v-for="serie in store.series" :serie="serie"/>
+        <Movie v-show="store.type === 'movies' || store.type === 'all'" v-for="movie in store.movie" :movieOrSerie="editResult(movie, 'movie')"/>
+        <Movie v-show="store.type === 'series' || store.type === 'all'" v-for="serie in store.series" :movieOrSerie="editResult(serie, 'serie')"/>
     </ul>
 </template>
 

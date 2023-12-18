@@ -46,6 +46,3 @@ export default {
     <Header @find="searchFn" />
     <MovieList />
 </template>
-
-<style scoped>
-</style>
