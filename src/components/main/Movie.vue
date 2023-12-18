@@ -21,7 +21,8 @@ export default {
                     this.movie.original_title,
                     this.movie.original_language,
                     this.movie.vote_average,
-                    this.movie.poster_path
+                    this.movie.poster_path,
+                    this.movie.overview
                 ];
             }else{
                 return [
@@ -30,7 +31,8 @@ export default {
                     this.serie.original_name,
                     this.serie.original_language,
                     this.serie.vote_average,
-                    this.serie.poster_path
+                    this.serie.poster_path,
+                    this.serie.overview
                 ];
             }
         },
@@ -40,6 +42,12 @@ export default {
             result = Math.round(number / 2);
             if(result <= 0)result++;
             return result;
+        },
+        cutOverview(overview){
+            if(overview.length >= 150){
+                return overview.substr(0, 350) + '...';
+            }
+            return overview;
         }
     },
 }
@@ -58,6 +66,7 @@ export default {
                     <font-awesome-icon v-else icon="fa-regular fa-star" />
                 </li>
             </ul>
+            <h4 class="language">{{ cutOverview(typeFn()[6]) }}</h4>
         </div>
         </div>
         <img v-if="typeFn()[5] !== null" :src="`https://image.tmdb.org/t/p/w342${typeFn()[5]}`" :alt="typeFn()[1]">

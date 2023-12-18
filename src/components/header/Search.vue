@@ -13,7 +13,7 @@ export default {
 <template>
     <div class="search">
         <label for="search">Cerca: </label>
-        <input type="text" id="search" v-model="store.searchText" @keyup.enter="$emit('find')" placeholder="Cerca">
+        <input type="text" id="searchF" v-model="store.searchText" @keyup.enter="$emit('find')" placeholder="Cerca">
         <button @click="$emit('find')">
             <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
         </button>
